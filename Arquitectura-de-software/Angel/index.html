@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    </head>
+    <body>
+        <script>
+    import mysql from 'mysql2/promise';
+    
+    class Connection{
+        constructor(){
+            this.Connection = mysql.creatConnection({
+                host: 'localhost',
+                user: 'root',
+                password: '',   
+                database: 'empresa'
+            });
+
+            this.Connection.connect((err) => {
+                if(err){
+                console.log('Error al conector a la base de datos' + err.message);
+                } else {
+                console.log('Conexión exitosa a la base de datos');
+                }
+            });
+        }
+        getConnection(){
+            return this.Connection;
+        }
+    }
+
+    const c1 = new Connection();
+    const c2 = new Connection();
+    const c3 = new Connection();
+
+    console.log('');
+      </script>
+    </body>
+</html>     

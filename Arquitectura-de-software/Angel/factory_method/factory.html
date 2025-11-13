@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo Factory Method - Sistema de Pagos</title>
+</head>
+<body>
+    <h2>Ejemplo del Patrón Factory Method</h2>
+
+    <script>
+        class Pago {
+            procesar() {
+                throw new Error('Este método procesar() debe ser implementado');
+            }
+        }
+
+        class PagoTarjetaCredito extends Pago {
+            procesar() {
+                document.write(' Procesando pago con Tarjeta de Crédito...<br>');
+            }
+        }
+
+        class PagoPayPal extends Pago {
+            procesar() {
+                document.write(' Procesando pago con PayPal...<br>');
+            }
+        }
+
+        class PagoCripto extends Pago {
+            procesar() {
+                document.write(' Procesando pago con Criptomoneda...<br>');
+            }
+        }
+
+        class PagoFactory {
+            static crearMetodoPago(tipo) {
+                switch (tipo) {
+                    case 'tarjeta':
+                        return new PagoTarjetaCredito();
+                    case 'paypal':
+                        return new PagoPayPal();
+                    case 'cripto':
+                        return new PagoCripto();
+                    default:
+                        throw new Error('Tipo de pago no válido');
+                }
+            }
+        }
+
+        // Uso del patrón Factory Method
+        const pago1 = PagoFactory.crearMetodoPago('tarjeta');
+        pago1.procesar();
+
+        const pago2 = PagoFactory.crearMetodoPago('paypal');
+        pago2.procesar();
+
+        const pago3 = PagoFactory.crearMetodoPago('cripto');
+        pago3.procesar();
+        
+    </script>
+</body>
+</html>
